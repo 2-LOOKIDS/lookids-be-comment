@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import lookids.comment.comment.domain.Comment;
 
@@ -18,4 +20,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 		boolean commentStatus);
 
 	Optional<Comment> findByCommentCode(String commentCode);
+
+	// 특정 피드에 속한 댓글 수를 카운팅
+	@Query("SELECT COUNT(c) FROM Comment c WHERE c.feedCode = :feedCode AND c.parentCommentCode IS NULL")
+	long countCommentsByFeedCode(@Param("feedCode") String feedCode);
 }

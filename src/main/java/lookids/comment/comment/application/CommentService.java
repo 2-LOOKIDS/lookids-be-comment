@@ -41,4 +41,11 @@ public interface CommentService {
 	 */
 	void deleteComment(CommentDeleteDto commentDeleteDto);
 
+	/**
+	 * 특정 피드의 댓글 수를 가져옵니다.
+	 *
+	 * @param feedCode 피드 코드
+	 * @return 댓글 수
+	 */
+	long getCommentCountByFeed(String feedCode);
 }

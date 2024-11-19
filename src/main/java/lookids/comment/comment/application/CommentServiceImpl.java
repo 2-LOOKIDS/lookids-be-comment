@@ -67,6 +67,11 @@ public class CommentServiceImpl implements CommentService {
 		commentRepository.save(commentDeleteDto.toEntity(comment));
 	}
 
+	// 특정 피드의 댓글 수 가져오기
+	public long getCommentCountByFeed(String feedCode) {
+		return commentRepository.countCommentsByFeedCode(feedCode);
+	}
+
 	public void sendMessage(String topic, Comment comment) {
 		kafkaTemplate.send(topic, comment);
 	}
