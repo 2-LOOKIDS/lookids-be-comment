@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import lookids.comment.comment.application.CommentService;
 import lookids.comment.common.dto.PageResponseDto;
 import lookids.comment.common.entity.BaseResponse;
-import lookids.comment.common.vo.CountResponseVo;
 import lookids.comment.common.vo.PageResponseVo;
 
 @Slf4j
@@ -50,9 +49,10 @@ public class CommentReadController {
 
 	// 특정 피드의 댓글 수 반환
 	@GetMapping("/count/feed/{feedCode}")
-	public BaseResponse<CountResponseVo> getCommentCountByFeed(@RequestParam(value = "feedCode") String feedCode) {
+	public BaseResponse<Long> getCommentCountByFeed(@RequestParam(value = "feedCode") String feedCode) {
+		log.info("요청받음 : {}", feedCode);
 
 		long count = commentService.getCommentCountByFeed(feedCode);
-		return new BaseResponse<>();
+		return new BaseResponse<>(count);
 	}
 }

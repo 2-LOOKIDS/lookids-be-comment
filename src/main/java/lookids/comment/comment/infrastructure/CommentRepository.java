@@ -22,6 +22,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	Optional<Comment> findByCommentCode(String commentCode);
 
 	// 특정 피드에 속한 댓글 수를 카운팅
-	@Query("SELECT COUNT(c) FROM Comment c WHERE c.feedCode = :feedCode AND c.parentCommentCode IS NULL")
+	@Query(name = "select count(*) from comment where feed_code = :feedCode", nativeQuery = true)
 	long countCommentsByFeedCode(@Param("feedCode") String feedCode);
 }
